@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognition4Chat - Chat with AI that thinks before it speaks</title>
+    <meta name="description" content="Cognition4Chat - Agentic WebChat powered by R-JEPA World Model. Experience augmented reasoning with conversational AI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-chat: #1a2332;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #22d3ee;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 1.75rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            padding: 0.25rem;
+            border-radius: 8px;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background:
+                radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Chat Demo */
+        .chat-demo {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            background: var(--bg-chat);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-mode {
+            margin-left: auto;
+            background: rgba(99, 102, 241, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        .chat-messages {
+            padding: 1.5rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            font-size: 0.95rem;
+        }
+
+        .message-user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-ai {
+            background: var(--bg-chat);
+            color: var(--text);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-thinking {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .thinking-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .thinking-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+
+        .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+        }
+
+        .chat-input {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: var(--bg-chat);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .chat-input input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chat-input button {
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Modes Section */
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .mode-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+        }
+
+        .mode-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        .mode-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .mode-card p {
+            color: var(--text-muted);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 4rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .how-it-works h3 {
+            text-align: center;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .flow-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .flow-step h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-step p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .flow-arrow {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background:
+                radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .modes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">
+                <span class="logo-icon">💬</span>
+                Cognition4Chat
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features" data-i18n="nav.features">Features</a></li>
+                <li><a href="#modes" data-i18n="nav.modes">Modes</a></li>
+                <li><a href="#how-it-works" data-i18n="nav.how">How It Works</a></li>
+                <li><a href="https://cognition4ai.com" target="_blank">R-JEPA API</a></li>
+            </ul>
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-badge" data-i18n="hero.badge">Powered by R-JEPA World Model</span>
+                    <h1 data-i18n="hero.title">Chat with AI that thinks before it speaks</h1>
+                    <p data-i18n="hero.description">
+                        Experience the next generation of conversational AI. Cognition4Chat uses
+                        R-JEPA World Model to reason in latent space before responding,
+                        delivering more thoughtful and coherent conversations.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#chat-demo" class="btn btn-primary" data-i18n="hero.try">
+                            Try Demo →
+                        </a>
+                        <a href="https://cognition4ai.com" class="btn btn-secondary" target="_blank" data-i18n="hero.api">
+                            View R-JEPA API
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chat Demo -->
+                <div class="chat-demo" id="chat-demo">
+                    <div class="chat-header">
+                        <div class="chat-status">
+                            <span class="status-dot"></span>
+                            <span data-i18n="chat.connected">R-JEPA Connected</span>
+                        </div>
+                        <span class="chat-mode">RERANK</span>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message message-user" data-i18n="chat.msg1">
+                            How does quantum computing affect cryptography?
+                        </div>
+                        <div class="message-thinking">
+                            <div class="thinking-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span data-i18n="chat.thinking">Reasoning with R-JEPA...</span>
+                        </div>
+                        <div class="message message-ai" data-i18n="chat.msg2">
+                            Quantum computing poses both threats and opportunities for cryptography.
+                            While Shor's algorithm could break RSA encryption, post-quantum cryptographic
+                            methods like lattice-based cryptography are being developed to ensure security
+                            in the quantum era.
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Ask anything..." data-i18n-placeholder="chat.placeholder">
+                        <button data-i18n="chat.send">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <div class="section-header">
+                <h2 data-i18n="features.title">Augmented Reasoning</h2>
+                <p data-i18n="features.description">
+                    Powered by R-JEPA, Cognition4Chat thinks before it responds
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 data-i18n="features.latent.title">Latent Space Reasoning</h3>
+                    <p data-i18n="features.latent.desc">
+                        Processes queries through R-JEPA's latent space for deeper understanding
+                        before generating responses.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 data-i18n="features.multi.title">Multi-Agent System</h3>
+                    <p data-i18n="features.multi.desc">
+                        Multiple AI agents collaborate, guided by the World Model to produce
+                        coherent and accurate answers.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 data-i18n="features.memory.title">Associative Memory</h3>
+                    <p data-i18n="features.memory.desc">
+                        Maintains context through associative memory patterns, enabling
+                        natural multi-turn conversations.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 data-i18n="features.guidance.title">Latent Guidance</h3>
+                    <p data-i18n="features.guidance.desc">
+                        R-JEPA predictions guide response generation, ensuring relevance
+                        and coherence throughout.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modes Section -->
+        <section class="section" id="modes">
+            <div class="section-header">
+                <h2 data-i18n="modes.title">R-JEPA Modes</h2>
+                <p data-i18n="modes.description">
+                    Three powerful modes for different reasoning needs
+                </p>
+            </div>
+
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <div class="mode-name">RERANK</div>
+                    <h3 data-i18n="modes.rerank.title">Response Reranking</h3>
+                    <p data-i18n="modes.rerank.desc">
+                        Generate multiple responses and use R-JEPA to score and select
+                        the most coherent one.
+                    </p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-name">NUDGE</div>
+                    <h3 data-i18n="modes.nudge.title">Soft Guidance</h3>
+                    <p data-i18n="modes.nudge.desc">
+                        Gently steer the AI's response generation using latent space
+                        predictions as soft constraints.
+                    </p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-name">PLAN</div>
+                    <h3 data-i18n="modes.plan.title">Action Planning</h3>
+                    <p data-i18n="modes.plan.desc">
+                        Use R-JEPA to plan multi-step reasoning before executing
+                        complex queries.
+                    </p>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="how-it-works" id="how-it-works">
+                <h3 data-i18n="how.title">How It Works</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-icon">💬</div>
+                        <h4 data-i18n="how.step1.title">Your Message</h4>
+                        <p data-i18n="how.step1.desc">Enter your question or request</p>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-step">
+                        <div class="flow-icon">🧠</div>
+                        <h4 data-i18n="how.step2.title">R-JEPA Processing</h4>
+                        <p data-i18n="how.step2.desc">World Model reasons in latent space</p>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-step">
+                        <div class="flow-icon">⚡</div>
+                        <h4 data-i18n="how.step3.title">Guided Generation</h4>
+                        <p data-i18n="how.step3.desc">LLM generates with R-JEPA guidance</p>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-step">
+                        <div class="flow-icon">✨</div>
+                        <h4 data-i18n="how.step4.title">Smart Response</h4>
+                        <p data-i18n="how.step4.desc">Coherent, thoughtful answer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 data-i18n="cta.title">Ready to Experience Augmented Chat?</h2>
+            <p data-i18n="cta.description">
+                Start chatting with AI that truly thinks before it speaks.
+            </p>
+            <div class="hero-buttons" style="justify-content: center;">
+                <a href="https://cognition4ai.com" class="btn btn-primary" target="_blank" data-i18n="cta.api">
+                    Explore R-JEPA API →
+                </a>
+                <a href="https://cyberplace.ai" class="btn btn-secondary" target="_blank" data-i18n="cta.docs">
+                    Documentation
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Teleadmin</h4>
+                <ul>
+                    <li><a href="https://teleadmin.net" target="_blank">teleadmin.net</a></li>
+                    <li><a href="https://cyberplace.ai" target="_blank">cyberplace.ai</a></li>
+                    <li><a href="mailto:contact@teleadmin.net">contact@teleadmin.net</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.products">Products</h4>
+                <ul>
+                    <li><a href="https://cognition4ai.com" target="_blank">Cognition4AI (R-JEPA)</a></li>
+                    <li><strong style="color: var(--accent);">Cognition4Chat</strong></li>
+                    <li><span style="color: var(--text-muted)">Teleadmin.AI (Soon)</span></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.resources">Resources</h4>
+                <ul>
+                    <li><a href="https://cyberplace.ai" target="_blank" data-i18n="footer.docs">Documentation</a></li>
+                    <li><a href="https://github.com/Teleadmin-ai" target="_blank">GitHub</a></li>
+                    <li><a href="https://cognition4ai.com" target="_blank">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.powered">Powered By</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    R-JEPA World Model<br>
+                    <a href="https://cognition4ai.com" target="_blank" style="color: var(--accent);">cognition4ai.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Teleadmin — Romain Provençal, CEO</p>
+        </div>
+    </footer>
+
+    <script>
+        // i18n translations
+        const translations = {
+            en: {
+                "nav.features": "Features",
+                "nav.modes": "Modes",
+                "nav.how": "How It Works",
+                "hero.badge": "Powered by R-JEPA World Model",
+                "hero.title": "Chat with AI that thinks before it speaks",
+                "hero.description": "Experience the next generation of conversational AI. Cognition4Chat uses R-JEPA World Model to reason in latent space before responding, delivering more thoughtful and coherent conversations.",
+                "hero.try": "Try Demo →",
+                "hero.api": "View R-JEPA API",
+                "chat.connected": "R-JEPA Connected",
+                "chat.thinking": "Reasoning with R-JEPA...",
+                "chat.msg1": "How does quantum computing affect cryptography?",
+                "chat.msg2": "Quantum computing poses both threats and opportunities for cryptography. While Shor's algorithm could break RSA encryption, post-quantum cryptographic methods like lattice-based cryptography are being developed to ensure security in the quantum era.",
+                "chat.placeholder": "Ask anything...",
+                "chat.send": "Send",
+                "features.title": "Augmented Reasoning",
+                "features.description": "Powered by R-JEPA, Cognition4Chat thinks before it responds",
+                "features.latent.title": "Latent Space Reasoning",
+                "features.latent.desc": "Processes queries through R-JEPA's latent space for deeper understanding before generating responses.",
+                "features.multi.title": "Multi-Agent System",
+                "features.multi.desc": "Multiple AI agents collaborate, guided by the World Model to produce coherent and accurate answers.",
+                "features.memory.title": "Associative Memory",
+                "features.memory.desc": "Maintains context through associative memory patterns, enabling natural multi-turn conversations.",
+                "features.guidance.title": "Latent Guidance",
+                "features.guidance.desc": "R-JEPA predictions guide response generation, ensuring relevance and coherence throughout.",
+                "modes.title": "R-JEPA Modes",
+                "modes.description": "Three powerful modes for different reasoning needs",
+                "modes.rerank.title": "Response Reranking",
+                "modes.rerank.desc": "Generate multiple responses and use R-JEPA to score and select the most coherent one.",
+                "modes.nudge.title": "Soft Guidance",
+                "modes.nudge.desc": "Gently steer the AI's response generation using latent space predictions as soft constraints.",
+                "modes.plan.title": "Action Planning",
+                "modes.plan.desc": "Use R-JEPA to plan multi-step reasoning before executing complex queries.",
+                "how.title": "How It Works",
+                "how.step1.title": "Your Message",
+                "how.step1.desc": "Enter your question or request",
+                "how.step2.title": "R-JEPA Processing",
+                "how.step2.desc": "World Model reasons in latent space",
+                "how.step3.title": "Guided Generation",
+                "how.step3.desc": "LLM generates with R-JEPA guidance",
+                "how.step4.title": "Smart Response",
+                "how.step4.desc": "Coherent, thoughtful answer",
+                "cta.title": "Ready to Experience Augmented Chat?",
+                "cta.description": "Start chatting with AI that truly thinks before it speaks.",
+                "cta.api": "Explore R-JEPA API →",
+                "cta.docs": "Documentation",
+                "footer.products": "Products",
+                "footer.resources": "Resources",
+                "footer.docs": "Documentation",
+                "footer.powered": "Powered By"
+            },
+            fr: {
+                "nav.features": "Fonctionnalités",
+                "nav.modes": "Modes",
+                "nav.how": "Comment ça marche",
+                "hero.badge": "Propulsé par R-JEPA World Model",
+                "hero.title": "Discutez avec une IA qui réfléchit avant de parler",
+                "hero.description": "Découvrez la nouvelle génération d'IA conversationnelle. Cognition4Chat utilise le World Model R-JEPA pour raisonner dans l'espace latent avant de répondre, offrant des conversations plus réfléchies et cohérentes.",
+                "hero.try": "Essayer la Démo →",
+                "hero.api": "Voir l'API R-JEPA",
+                "chat.connected": "R-JEPA Connecté",
+                "chat.thinking": "Raisonnement avec R-JEPA...",
+                "chat.msg1": "Comment l'informatique quantique affecte-t-elle la cryptographie ?",
+                "chat.msg2": "L'informatique quantique présente à la fois des menaces et des opportunités pour la cryptographie. Alors que l'algorithme de Shor pourrait casser le chiffrement RSA, des méthodes cryptographiques post-quantiques comme la cryptographie basée sur les réseaux sont développées pour assurer la sécurité à l'ère quantique.",
+                "chat.placeholder": "Posez votre question...",
+                "chat.send": "Envoyer",
+                "features.title": "Raisonnement Augmenté",
+                "features.description": "Propulsé par R-JEPA, Cognition4Chat réfléchit avant de répondre",
+                "features.latent.title": "Raisonnement Latent",
+                "features.latent.desc": "Traite les requêtes via l'espace latent R-JEPA pour une compréhension profonde avant de générer des réponses.",
+                "features.multi.title": "Système Multi-Agent",
+                "features.multi.desc": "Plusieurs agents IA collaborent, guidés par le World Model pour produire des réponses cohérentes et précises.",
+                "features.memory.title": "Mémoire Associative",
+                "features.memory.desc": "Maintient le contexte via des patterns de mémoire associative, permettant des conversations naturelles multi-tours.",
+                "features.guidance.title": "Guidance Latente",
+                "features.guidance.desc": "Les prédictions R-JEPA guident la génération de réponses, assurant pertinence et cohérence.",
+                "modes.title": "Modes R-JEPA",
+                "modes.description": "Trois modes puissants pour différents besoins de raisonnement",
+                "modes.rerank.title": "Re-classement",
+                "modes.rerank.desc": "Génère plusieurs réponses et utilise R-JEPA pour scorer et sélectionner la plus cohérente.",
+                "modes.nudge.title": "Guidance Douce",
+                "modes.nudge.desc": "Oriente doucement la génération de réponse via les prédictions latentes comme contraintes souples.",
+                "modes.plan.title": "Planification",
+                "modes.plan.desc": "Utilise R-JEPA pour planifier le raisonnement multi-étapes avant d'exécuter des requêtes complexes.",
+                "how.title": "Comment ça Marche",
+                "how.step1.title": "Votre Message",
+                "how.step1.desc": "Entrez votre question",
+                "how.step2.title": "Traitement R-JEPA",
+                "how.step2.desc": "Le World Model raisonne",
+                "how.step3.title": "Génération Guidée",
+                "how.step3.desc": "Le LLM génère avec R-JEPA",
+                "how.step4.title": "Réponse Intelligente",
+                "how.step4.desc": "Réponse cohérente et réfléchie",
+                "cta.title": "Prêt à Expérimenter le Chat Augmenté ?",
+                "cta.description": "Commencez à discuter avec une IA qui réfléchit vraiment avant de parler.",
+                "cta.api": "Explorer l'API R-JEPA →",
+                "cta.docs": "Documentation",
+                "footer.products": "Produits",
+                "footer.resources": "Ressources",
+                "footer.docs": "Documentation",
+                "footer.powered": "Propulsé par"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            document.documentElement.lang = lang;
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .mode-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
