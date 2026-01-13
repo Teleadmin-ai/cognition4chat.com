@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognition4Chat - Chat with AI that thinks before it speaks</title>
-    <meta name="description" content="Cognition4Chat - Agentic WebChat powered by R-JEPA World Model. Experience augmented reasoning with conversational AI.">
+    <title>Cognition4Chat - AI Agent for Business | Phone & Desktop Control</title>
+    <meta name="description" content="Cognition4Chat - Enterprise AI Agent that answers phone calls, controls workstations, and provides intelligent customer support. Coming soon.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -144,12 +144,12 @@
 
         .hero-badge {
             display: inline-block;
-            background: rgba(99, 102, 241, 0.2);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.875rem;
-            color: var(--accent);
+            color: var(--warning);
             margin-bottom: 2rem;
         }
 
@@ -210,28 +210,54 @@
             border-color: var(--primary);
         }
 
-        /* Chat Demo */
-        .chat-demo {
+        /* Agent Visual */
+        .agent-visual {
             background: var(--bg-card);
             border-radius: 20px;
             border: 1px solid rgba(99, 102, 241, 0.2);
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
         }
 
-        .chat-header {
-            background: var(--bg-chat);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        .agent-header {
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
         }
 
-        .chat-status {
+        .agent-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .agent-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .agent-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .agent-status {
+            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--success);
+            font-size: 0.9rem;
         }
 
         .status-dot {
@@ -247,108 +273,45 @@
             50% { opacity: 0.5; }
         }
 
-        .chat-mode {
-            margin-left: auto;
-            background: rgba(99, 102, 241, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: var(--accent);
-        }
-
-        .chat-messages {
-            padding: 1.5rem;
-            min-height: 300px;
+        .agent-capabilities {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        .message {
-            max-width: 85%;
-            padding: 1rem 1.25rem;
-            border-radius: 16px;
-            font-size: 0.95rem;
-        }
-
-        .message-user {
-            background: var(--primary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-
-        .message-ai {
-            background: var(--bg-chat);
-            color: var(--text);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-
-        .message-thinking {
+        .capability {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        .thinking-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .thinking-dots span {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: bounce 1.4s infinite;
-        }
-
-        .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-6px); }
-        }
-
-        .chat-input {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            display: flex;
             gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
         }
 
-        .chat-input input {
+        .capability-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .capability-text {
             flex: 1;
-            background: var(--bg-chat);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            color: var(--text);
-            font-size: 0.95rem;
         }
 
-        .chat-input input::placeholder {
+        .capability-text strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .capability-text span {
             color: var(--text-muted);
-        }
-
-        .chat-input button {
-            background: var(--gradient-primary);
-            border: none;
-            border-radius: 12px;
-            padding: 0.75rem 1.5rem;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .chat-input button:hover {
-            transform: scale(1.05);
+            font-size: 0.85rem;
         }
 
         /* Features Section */
@@ -378,87 +341,70 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
         .feature-card {
             background: var(--bg-card);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 2.5rem;
             border: 1px solid rgba(99, 102, 241, 0.1);
             transition: all 0.3s;
+            text-align: center;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--text);
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Modes Section */
-        .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .mode-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .mode-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary);
             box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
         }
 
-        .mode-name {
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-card h3 {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
             margin-bottom: 1rem;
-            font-family: monospace;
+            color: var(--text);
         }
 
-        .mode-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .mode-card p {
+        .feature-card p {
             color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* How It Works */
-        .how-it-works {
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
             background: var(--bg-card);
             border-radius: 20px;
             padding: 3rem;
@@ -466,71 +412,157 @@
             border: 1px solid rgba(99, 102, 241, 0.1);
         }
 
-        .how-it-works h3 {
+        .use-cases h3 {
             text-align: center;
             font-size: 1.75rem;
             margin-bottom: 2rem;
         }
 
-        .flow-diagram {
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .use-case {
+            padding: 1.5rem;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .use-case h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .use-case p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* How It Works */
+        .how-section {
+            padding: 6rem 2rem;
+            background:
+                radial-gradient(ellipse at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+        }
+
+        .how-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
+            align-items: flex-start;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
-        .flow-step {
+        .step {
             flex: 1;
-            min-width: 150px;
+            min-width: 200px;
             text-align: center;
-            padding: 1.5rem;
+            position: relative;
         }
 
-        .flow-icon {
+        .step-number {
             width: 60px;
             height: 60px;
-            background: var(--bg-dark);
-            border: 2px solid var(--primary);
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            margin: 0 auto 1rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
         }
 
-        .flow-step h4 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+        .step h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
         }
 
-        .flow-step p {
+        .step p {
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
         }
 
-        .flow-arrow {
+        .step-arrow {
+            position: absolute;
+            top: 30px;
+            right: -30px;
             color: var(--primary);
             font-size: 1.5rem;
         }
 
-        /* CTA Section */
+        /* CTA / Waitlist Section */
         .cta-section {
+            padding: 6rem 2rem;
             text-align: center;
-            padding: 4rem 2rem;
-            background:
-                radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
         }
 
-        .cta-section h2 {
+        .cta-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-card h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .cta-section p {
+        .cta-card p {
             color: var(--text-muted);
             margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .waitlist-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waitlist-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-note {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
         /* Footer */
@@ -684,7 +716,6 @@
             font-size: 0.8rem;
         }
 
-        /* Site actuel (highlight) */
         .dropdown-item.current a {
             background: rgba(99, 102, 241, 0.15);
             border-left: 3px solid var(--primary);
@@ -709,16 +740,21 @@
                 justify-content: center;
             }
 
-            .modes-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .flow-diagram {
+            .steps {
                 flex-direction: column;
+                align-items: center;
             }
 
-            .flow-arrow {
-                transform: rotate(90deg);
+            .step-arrow {
+                display: none;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
             }
         }
 
@@ -733,14 +769,13 @@
     <header>
         <nav>
             <a href="/" class="logo">
-                <span class="logo-icon">💬</span>
+                <span class="logo-icon">🤖</span>
                 Cognition4Chat
             </a>
             <ul class="nav-links">
                 <li><a href="#features" data-i18n="nav.features">Features</a></li>
-                <li><a href="#modes" data-i18n="nav.modes">Modes</a></li>
                 <li><a href="#how-it-works" data-i18n="nav.how">How It Works</a></li>
-                <li><a href="https://cognition4ai.com" target="_blank">R-JEPA API</a></li>
+                <li><a href="#waitlist" data-i18n="nav.waitlist">Join Waitlist</a></li>
                 <li class="dropdown">
                     <a href="#" class="ecosystem-link">
                         <span class="icon">🌐</span>
@@ -768,10 +803,10 @@
                         </li>
                         <li class="dropdown-item current">
                             <a href="https://cognition4chat.com">
-                                <span class="site-icon">💬</span>
+                                <span class="site-icon">🤖</span>
                                 <div class="site-info">
                                     <strong data-i18n="ecosystem.cognition4chat.title">Cognition4Chat</strong>
-                                    <small data-i18n="ecosystem.cognition4chat.desc">WebChat Agent</small>
+                                    <small data-i18n="ecosystem.cognition4chat.desc">AI Agent</small>
                                 </div>
                             </a>
                         </li>
@@ -779,8 +814,8 @@
                             <a href="https://cognition4ai.com">
                                 <span class="site-icon">🧠</span>
                                 <div class="site-info">
-                                    <strong data-i18n="ecosystem.cognition4ai.title">R-JEPA</strong>
-                                    <small data-i18n="ecosystem.cognition4ai.desc">World Model</small>
+                                    <strong data-i18n="ecosystem.cognition4ai.title">Cognition4AI</strong>
+                                    <small data-i18n="ecosystem.cognition4ai.desc">R-JEPA World Model</small>
                                 </div>
                             </a>
                         </li>
@@ -798,7 +833,7 @@
                                 <span class="site-icon">🤖</span>
                                 <div class="site-info">
                                     <strong data-i18n="ecosystem.senior.title">Senior Robotics</strong>
-                                    <small data-i18n="ecosystem.senior.desc">Joe - Robot Compagnon</small>
+                                    <small data-i18n="ecosystem.senior.desc">Joe - Companion Robot</small>
                                 </div>
                             </a>
                         </li>
@@ -817,52 +852,58 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-text">
-                    <span class="hero-badge" data-i18n="hero.badge">Powered by R-JEPA World Model</span>
-                    <h1 data-i18n="hero.title">Chat with AI that thinks before it speaks</h1>
+                    <span class="hero-badge" data-i18n="hero.badge">🚀 Coming Soon</span>
+                    <h1 data-i18n="hero.title">Your AI Agent for Business</h1>
                     <p data-i18n="hero.description">
-                        Experience the next generation of conversational AI. Cognition4Chat uses
-                        R-JEPA World Model to reason in latent space before responding,
-                        delivering more thoughtful and coherent conversations.
+                        Cognition4Chat is an intelligent AI agent that answers phone calls,
+                        takes control of workstations for remote assistance, and provides
+                        24/7 customer support. Automate your business communications.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#chat-demo" class="btn btn-primary" data-i18n="hero.try">
-                            Try Demo →
+                        <a href="#waitlist" class="btn btn-primary" data-i18n="hero.join">
+                            Join Waitlist →
                         </a>
-                        <a href="https://cognition4ai.com" class="btn btn-secondary" target="_blank" data-i18n="hero.api">
-                            View R-JEPA API
+                        <a href="#features" class="btn btn-secondary" data-i18n="hero.learn">
+                            Learn More
                         </a>
                     </div>
                 </div>
 
-                <!-- Chat Demo -->
-                <div class="chat-demo" id="chat-demo">
-                    <div class="chat-header">
-                        <div class="chat-status">
+                <!-- Agent Visual -->
+                <div class="agent-visual">
+                    <div class="agent-header">
+                        <div class="agent-avatar">🤖</div>
+                        <div class="agent-info">
+                            <h3>Cognition4Chat Agent</h3>
+                            <p data-i18n="agent.role">Enterprise AI Assistant</p>
+                        </div>
+                        <div class="agent-status">
                             <span class="status-dot"></span>
-                            <span data-i18n="chat.connected">R-JEPA Connected</span>
+                            <span data-i18n="agent.status">Active</span>
                         </div>
-                        <span class="chat-mode">RERANK</span>
                     </div>
-                    <div class="chat-messages">
-                        <div class="message message-user" data-i18n="chat.msg1">
-                            How does quantum computing affect cryptography?
-                        </div>
-                        <div class="message-thinking">
-                            <div class="thinking-dots">
-                                <span></span><span></span><span></span>
+                    <div class="agent-capabilities">
+                        <div class="capability">
+                            <div class="capability-icon">📞</div>
+                            <div class="capability-text">
+                                <strong data-i18n="cap.phone.title">Phone Calls</strong>
+                                <span data-i18n="cap.phone.desc">Answering and making calls</span>
                             </div>
-                            <span data-i18n="chat.thinking">Reasoning with R-JEPA...</span>
                         </div>
-                        <div class="message message-ai" data-i18n="chat.msg2">
-                            Quantum computing poses both threats and opportunities for cryptography.
-                            While Shor's algorithm could break RSA encryption, post-quantum cryptographic
-                            methods like lattice-based cryptography are being developed to ensure security
-                            in the quantum era.
+                        <div class="capability">
+                            <div class="capability-icon">🖥️</div>
+                            <div class="capability-text">
+                                <strong data-i18n="cap.desktop.title">Desktop Control</strong>
+                                <span data-i18n="cap.desktop.desc">Remote assistance & automation</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="chat-input">
-                        <input type="text" placeholder="Ask anything..." data-i18n-placeholder="chat.placeholder">
-                        <button data-i18n="chat.send">Send</button>
+                        <div class="capability">
+                            <div class="capability-icon">💬</div>
+                            <div class="capability-text">
+                                <strong data-i18n="cap.chat.title">Live Chat</strong>
+                                <span data-i18n="cap.chat.desc">Customer support 24/7</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -871,133 +912,147 @@
         <!-- Features Section -->
         <section class="section" id="features">
             <div class="section-header">
-                <h2 data-i18n="features.title">Augmented Reasoning</h2>
+                <h2 data-i18n="features.title">Three Powerful Capabilities</h2>
                 <p data-i18n="features.description">
-                    Powered by R-JEPA, Cognition4Chat thinks before it responds
+                    One AI agent that handles all your business communication needs
                 </p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 data-i18n="features.latent.title">Latent Space Reasoning</h3>
-                    <p data-i18n="features.latent.desc">
-                        Processes queries through R-JEPA's latent space for deeper understanding
-                        before generating responses.
+                    <div class="feature-icon">📞</div>
+                    <h3 data-i18n="features.phone.title">AI Phone Agent</h3>
+                    <p data-i18n="features.phone.desc">
+                        Your AI receptionist that answers calls, takes messages,
+                        schedules appointments, and transfers to the right person.
                     </p>
+                    <ul class="feature-list">
+                        <li data-i18n="features.phone.f1">Natural voice conversations</li>
+                        <li data-i18n="features.phone.f2">24/7 availability</li>
+                        <li data-i18n="features.phone.f3">Smart call routing</li>
+                        <li data-i18n="features.phone.f4">Multilingual support</li>
+                    </ul>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 data-i18n="features.multi.title">Multi-Agent System</h3>
-                    <p data-i18n="features.multi.desc">
-                        Multiple AI agents collaborate, guided by the World Model to produce
-                        coherent and accurate answers.
+                    <div class="feature-icon">🖥️</div>
+                    <h3 data-i18n="features.desktop.title">Desktop Control</h3>
+                    <p data-i18n="features.desktop.desc">
+                        Take remote control of workstations to provide hands-on
+                        technical support and automate repetitive tasks.
                     </p>
+                    <ul class="feature-list">
+                        <li data-i18n="features.desktop.f1">Secure remote access</li>
+                        <li data-i18n="features.desktop.f2">Live troubleshooting</li>
+                        <li data-i18n="features.desktop.f3">Task automation</li>
+                        <li data-i18n="features.desktop.f4">Screen sharing</li>
+                    </ul>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h3 data-i18n="features.memory.title">Associative Memory</h3>
-                    <p data-i18n="features.memory.desc">
-                        Maintains context through associative memory patterns, enabling
-                        natural multi-turn conversations.
+                    <div class="feature-icon">💬</div>
+                    <h3 data-i18n="features.chat.title">Smart Chat Support</h3>
+                    <p data-i18n="features.chat.desc">
+                        Intelligent chat interface that understands context,
+                        resolves issues, and escalates when needed.
                     </p>
+                    <ul class="feature-list">
+                        <li data-i18n="features.chat.f1">Instant responses</li>
+                        <li data-i18n="features.chat.f2">Context awareness</li>
+                        <li data-i18n="features.chat.f3">Seamless escalation</li>
+                        <li data-i18n="features.chat.f4">CRM integration</li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 data-i18n="features.guidance.title">Latent Guidance</h3>
-                    <p data-i18n="features.guidance.desc">
-                        R-JEPA predictions guide response generation, ensuring relevance
-                        and coherence throughout.
-                    </p>
+            <!-- Use Cases -->
+            <div class="use-cases">
+                <h3 data-i18n="usecases.title">Perfect For</h3>
+                <div class="use-cases-grid">
+                    <div class="use-case">
+                        <h4>🏢 <span data-i18n="usecases.support.title">IT Support</span></h4>
+                        <p data-i18n="usecases.support.desc">
+                            Provide remote technical assistance with desktop control and voice guidance.
+                        </p>
+                    </div>
+                    <div class="use-case">
+                        <h4>📞 <span data-i18n="usecases.reception.title">Reception</span></h4>
+                        <p data-i18n="usecases.reception.desc">
+                            Never miss a call. AI handles inquiries, bookings, and message taking.
+                        </p>
+                    </div>
+                    <div class="use-case">
+                        <h4>🛒 <span data-i18n="usecases.sales.title">Sales & Orders</span></h4>
+                        <p data-i18n="usecases.sales.desc">
+                            Process orders, answer product questions, and qualify leads automatically.
+                        </p>
+                    </div>
+                    <div class="use-case">
+                        <h4>🎓 <span data-i18n="usecases.training.title">Training</span></h4>
+                        <p data-i18n="usecases.training.desc">
+                            Guide employees through software with screen control and voice instructions.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Modes Section -->
-        <section class="section" id="modes">
-            <div class="section-header">
-                <h2 data-i18n="modes.title">R-JEPA Modes</h2>
-                <p data-i18n="modes.description">
-                    Three powerful modes for different reasoning needs
+        <!-- How It Works -->
+        <section class="how-section" id="how-it-works">
+            <div class="how-content">
+                <div class="section-header">
+                    <h2 data-i18n="how.title">How It Works</h2>
+                    <p data-i18n="how.description">
+                        Deploy your AI agent in minutes, not months
+                    </p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4 data-i18n="how.step1.title">Connect</h4>
+                        <p data-i18n="how.step1.desc">Link your phone system, chat platform, and workstations</p>
+                        <span class="step-arrow">→</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4 data-i18n="how.step2.title">Configure</h4>
+                        <p data-i18n="how.step2.desc">Define your agent's knowledge, tone, and capabilities</p>
+                        <span class="step-arrow">→</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4 data-i18n="how.step3.title">Deploy</h4>
+                        <p data-i18n="how.step3.desc">Go live and let your AI agent handle communications</p>
+                        <span class="step-arrow">→</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4 data-i18n="how.step4.title">Improve</h4>
+                        <p data-i18n="how.step4.desc">AI learns from interactions and gets smarter over time</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Waitlist Section -->
+        <section class="cta-section" id="waitlist">
+            <div class="cta-card">
+                <h2 data-i18n="cta.title">Be First in Line</h2>
+                <p data-i18n="cta.description">
+                    Join the waitlist to get early access to Cognition4Chat
+                    and exclusive launch pricing.
                 </p>
-            </div>
-
-            <div class="modes-grid">
-                <div class="mode-card">
-                    <div class="mode-name">RERANK</div>
-                    <h3 data-i18n="modes.rerank.title">Response Reranking</h3>
-                    <p data-i18n="modes.rerank.desc">
-                        Generate multiple responses and use R-JEPA to score and select
-                        the most coherent one.
-                    </p>
-                </div>
-
-                <div class="mode-card">
-                    <div class="mode-name">NUDGE</div>
-                    <h3 data-i18n="modes.nudge.title">Soft Guidance</h3>
-                    <p data-i18n="modes.nudge.desc">
-                        Gently steer the AI's response generation using latent space
-                        predictions as soft constraints.
-                    </p>
-                </div>
-
-                <div class="mode-card">
-                    <div class="mode-name">PLAN</div>
-                    <h3 data-i18n="modes.plan.title">Action Planning</h3>
-                    <p data-i18n="modes.plan.desc">
-                        Use R-JEPA to plan multi-step reasoning before executing
-                        complex queries.
-                    </p>
-                </div>
-            </div>
-
-            <!-- How It Works -->
-            <div class="how-it-works" id="how-it-works">
-                <h3 data-i18n="how.title">How It Works</h3>
-                <div class="flow-diagram">
-                    <div class="flow-step">
-                        <div class="flow-icon">💬</div>
-                        <h4 data-i18n="how.step1.title">Your Message</h4>
-                        <p data-i18n="how.step1.desc">Enter your question or request</p>
-                    </div>
-                    <span class="flow-arrow">→</span>
-                    <div class="flow-step">
-                        <div class="flow-icon">🧠</div>
-                        <h4 data-i18n="how.step2.title">R-JEPA Processing</h4>
-                        <p data-i18n="how.step2.desc">World Model reasons in latent space</p>
-                    </div>
-                    <span class="flow-arrow">→</span>
-                    <div class="flow-step">
-                        <div class="flow-icon">⚡</div>
-                        <h4 data-i18n="how.step3.title">Guided Generation</h4>
-                        <p data-i18n="how.step3.desc">LLM generates with R-JEPA guidance</p>
-                    </div>
-                    <span class="flow-arrow">→</span>
-                    <div class="flow-step">
-                        <div class="flow-icon">✨</div>
-                        <h4 data-i18n="how.step4.title">Smart Response</h4>
-                        <p data-i18n="how.step4.desc">Coherent, thoughtful answer</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <h2 data-i18n="cta.title">Ready to Experience Augmented Chat?</h2>
-            <p data-i18n="cta.description">
-                Start chatting with AI that truly thinks before it speaks.
-            </p>
-            <div class="hero-buttons" style="justify-content: center;">
-                <a href="https://cognition4ai.com" class="btn btn-primary" target="_blank" data-i18n="cta.api">
-                    Explore R-JEPA API →
-                </a>
-                <a href="https://cyberplace.ai" class="btn btn-secondary" target="_blank" data-i18n="cta.docs">
-                    Documentation
-                </a>
+                <form class="waitlist-form" onsubmit="handleWaitlist(event)">
+                    <input type="email" placeholder="your@email.com" required data-i18n-placeholder="cta.placeholder">
+                    <button type="submit" class="btn btn-primary" data-i18n="cta.join">Join Waitlist</button>
+                </form>
+                <p class="form-note" data-i18n="cta.note">
+                    No spam. We'll only contact you about launch updates.
+                </p>
+                <p class="form-note" style="margin-top: 1rem; color: var(--accent);" data-i18n="cta.future">
+                    🧠 Future vision: R-JEPA AGI integration for advanced reasoning
+                </p>
             </div>
         </section>
     </main>
@@ -1008,16 +1063,16 @@
                 <h4>Teleadmin</h4>
                 <ul>
                     <li><a href="https://teleadmin.net" target="_blank">teleadmin.net</a></li>
-                    <li><a href="https://cyberplace.ai" target="_blank">cyberplace.ai</a></li>
+                    <li><a href="https://teleadmin.com" target="_blank">teleadmin.com</a></li>
                     <li><a href="mailto:contact@teleadmin.net">contact@teleadmin.net</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4 data-i18n="footer.products">Products</h4>
                 <ul>
-                    <li><a href="https://cognition4ai.com" target="_blank">Cognition4AI (R-JEPA)</a></li>
                     <li><strong style="color: var(--accent);">Cognition4Chat</strong></li>
-                    <li><span style="color: var(--text-muted)">Teleadmin.AI (Soon)</span></li>
+                    <li><a href="https://cognition4ai.com" target="_blank">Cognition4AI</a></li>
+                    <li><a href="https://senior-robotics.com" target="_blank">Senior Robotics</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1025,19 +1080,18 @@
                 <ul>
                     <li><a href="https://cyberplace.ai" target="_blank" data-i18n="footer.docs">Documentation</a></li>
                     <li><a href="https://github.com/Teleadmin-ai" target="_blank">GitHub</a></li>
-                    <li><a href="https://cognition4ai.com" target="_blank">API Reference</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4 data-i18n="footer.powered">Powered By</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">
-                    R-JEPA World Model<br>
-                    <a href="https://cognition4ai.com" target="_blank" style="color: var(--accent);">cognition4ai.com</a>
+                <h4 data-i18n="footer.enterprise">Enterprise</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="footer.enterprise.desc">
+                    Custom deployment, dedicated support, and on-premise options available.
                 </p>
+                <a href="mailto:contact@teleadmin.net" style="color: var(--accent);">Contact Sales</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 Teleadmin — Romain Provençal, CEO</p>
+            <p>© 2025 Teleadmin — Romain Provençal, CEO</p>
         </div>
     </footer>
 
@@ -1046,127 +1100,165 @@
         const translations = {
             en: {
                 "nav.features": "Features",
-                "nav.modes": "Modes",
                 "nav.how": "How It Works",
+                "nav.waitlist": "Join Waitlist",
                 "nav.ecosystem": "Ecosystem",
                 "ecosystem.teleadmin.title": "Teleadmin",
                 "ecosystem.teleadmin.desc": "Central Hub",
+                "ecosystem.teleadmincom.title": "Teleadmin.com",
+                "ecosystem.teleadmincom.desc": "Hosting",
                 "ecosystem.cyberplace.title": "Cyberplace",
                 "ecosystem.cyberplace.desc": "AI Resources",
-                "ecosystem.cognition4ai.title": "R-JEPA",
-                "ecosystem.cognition4ai.desc": "World Model",
+                "ecosystem.cognition4ai.title": "Cognition4AI",
+                "ecosystem.cognition4ai.desc": "R-JEPA World Model",
                 "ecosystem.cognition4chat.title": "Cognition4Chat",
-                "ecosystem.cognition4chat.desc": "WebChat Agent",
+                "ecosystem.cognition4chat.desc": "AI Agent",
                 "ecosystem.senior.title": "Senior Robotics",
-                "ecosystem.senior.desc": "Joe - Companion Robot",
-                "hero.badge": "Powered by R-JEPA World Model",
-                "hero.title": "Chat with AI that thinks before it speaks",
-                "hero.description": "Experience the next generation of conversational AI. Cognition4Chat uses R-JEPA World Model to reason in latent space before responding, delivering more thoughtful and coherent conversations.",
-                "hero.try": "Try Demo →",
-                "hero.api": "View R-JEPA API",
-                "chat.connected": "R-JEPA Connected",
-                "chat.thinking": "Reasoning with R-JEPA...",
-                "chat.msg1": "How does quantum computing affect cryptography?",
-                "chat.msg2": "Quantum computing poses both threats and opportunities for cryptography. While Shor's algorithm could break RSA encryption, post-quantum cryptographic methods like lattice-based cryptography are being developed to ensure security in the quantum era.",
-                "chat.placeholder": "Ask anything...",
-                "chat.send": "Send",
-                "features.title": "Augmented Reasoning",
-                "features.description": "Powered by R-JEPA, Cognition4Chat thinks before it responds",
-                "features.latent.title": "Latent Space Reasoning",
-                "features.latent.desc": "Processes queries through R-JEPA's latent space for deeper understanding before generating responses.",
-                "features.multi.title": "Multi-Agent System",
-                "features.multi.desc": "Multiple AI agents collaborate, guided by the World Model to produce coherent and accurate answers.",
-                "features.memory.title": "Associative Memory",
-                "features.memory.desc": "Maintains context through associative memory patterns, enabling natural multi-turn conversations.",
-                "features.guidance.title": "Latent Guidance",
-                "features.guidance.desc": "R-JEPA predictions guide response generation, ensuring relevance and coherence throughout.",
-                "modes.title": "R-JEPA Modes",
-                "modes.description": "Three powerful modes for different reasoning needs",
-                "modes.rerank.title": "Response Reranking",
-                "modes.rerank.desc": "Generate multiple responses and use R-JEPA to score and select the most coherent one.",
-                "modes.nudge.title": "Soft Guidance",
-                "modes.nudge.desc": "Gently steer the AI's response generation using latent space predictions as soft constraints.",
-                "modes.plan.title": "Action Planning",
-                "modes.plan.desc": "Use R-JEPA to plan multi-step reasoning before executing complex queries.",
+                "ecosystem.senior.desc": "Companion Robot",
+                "hero.badge": "🚀 Coming Soon",
+                "hero.title": "Your AI Agent for Business",
+                "hero.description": "Cognition4Chat is an intelligent AI agent that answers phone calls, takes control of workstations for remote assistance, and provides 24/7 customer support. Automate your business communications.",
+                "hero.join": "Join Waitlist →",
+                "hero.learn": "Learn More",
+                "agent.role": "Enterprise AI Assistant",
+                "agent.status": "Active",
+                "cap.phone.title": "Phone Calls",
+                "cap.phone.desc": "Answering and making calls",
+                "cap.desktop.title": "Desktop Control",
+                "cap.desktop.desc": "Remote assistance & automation",
+                "cap.chat.title": "Live Chat",
+                "cap.chat.desc": "Customer support 24/7",
+                "features.title": "Three Powerful Capabilities",
+                "features.description": "One AI agent that handles all your business communication needs",
+                "features.phone.title": "AI Phone Agent",
+                "features.phone.desc": "Your AI receptionist that answers calls, takes messages, schedules appointments, and transfers to the right person.",
+                "features.phone.f1": "Natural voice conversations",
+                "features.phone.f2": "24/7 availability",
+                "features.phone.f3": "Smart call routing",
+                "features.phone.f4": "Multilingual support",
+                "features.desktop.title": "Desktop Control",
+                "features.desktop.desc": "Take remote control of workstations to provide hands-on technical support and automate repetitive tasks.",
+                "features.desktop.f1": "Secure remote access",
+                "features.desktop.f2": "Live troubleshooting",
+                "features.desktop.f3": "Task automation",
+                "features.desktop.f4": "Screen sharing",
+                "features.chat.title": "Smart Chat Support",
+                "features.chat.desc": "Intelligent chat interface that understands context, resolves issues, and escalates when needed.",
+                "features.chat.f1": "Instant responses",
+                "features.chat.f2": "Context awareness",
+                "features.chat.f3": "Seamless escalation",
+                "features.chat.f4": "CRM integration",
+                "usecases.title": "Perfect For",
+                "usecases.support.title": "IT Support",
+                "usecases.support.desc": "Provide remote technical assistance with desktop control and voice guidance.",
+                "usecases.reception.title": "Reception",
+                "usecases.reception.desc": "Never miss a call. AI handles inquiries, bookings, and message taking.",
+                "usecases.sales.title": "Sales & Orders",
+                "usecases.sales.desc": "Process orders, answer product questions, and qualify leads automatically.",
+                "usecases.training.title": "Training",
+                "usecases.training.desc": "Guide employees through software with screen control and voice instructions.",
                 "how.title": "How It Works",
-                "how.step1.title": "Your Message",
-                "how.step1.desc": "Enter your question or request",
-                "how.step2.title": "R-JEPA Processing",
-                "how.step2.desc": "World Model reasons in latent space",
-                "how.step3.title": "Guided Generation",
-                "how.step3.desc": "LLM generates with R-JEPA guidance",
-                "how.step4.title": "Smart Response",
-                "how.step4.desc": "Coherent, thoughtful answer",
-                "cta.title": "Ready to Experience Augmented Chat?",
-                "cta.description": "Start chatting with AI that truly thinks before it speaks.",
-                "cta.api": "Explore R-JEPA API →",
-                "cta.docs": "Documentation",
+                "how.description": "Deploy your AI agent in minutes, not months",
+                "how.step1.title": "Connect",
+                "how.step1.desc": "Link your phone system, chat platform, and workstations",
+                "how.step2.title": "Configure",
+                "how.step2.desc": "Define your agent's knowledge, tone, and capabilities",
+                "how.step3.title": "Deploy",
+                "how.step3.desc": "Go live and let your AI agent handle communications",
+                "how.step4.title": "Improve",
+                "how.step4.desc": "AI learns from interactions and gets smarter over time",
+                "cta.title": "Be First in Line",
+                "cta.description": "Join the waitlist to get early access to Cognition4Chat and exclusive launch pricing.",
+                "cta.placeholder": "your@email.com",
+                "cta.join": "Join Waitlist",
+                "cta.note": "No spam. We'll only contact you about launch updates.",
+                "cta.future": "🧠 Future vision: R-JEPA AGI integration for advanced reasoning",
                 "footer.products": "Products",
                 "footer.resources": "Resources",
                 "footer.docs": "Documentation",
-                "footer.powered": "Powered By"
+                "footer.enterprise": "Enterprise",
+                "footer.enterprise.desc": "Custom deployment, dedicated support, and on-premise options available."
             },
             fr: {
                 "nav.features": "Fonctionnalités",
-                "nav.modes": "Modes",
                 "nav.how": "Comment ça marche",
+                "nav.waitlist": "Liste d'attente",
                 "nav.ecosystem": "Écosystème",
                 "ecosystem.teleadmin.title": "Teleadmin",
                 "ecosystem.teleadmin.desc": "Hub Central",
+                "ecosystem.teleadmincom.title": "Teleadmin.com",
+                "ecosystem.teleadmincom.desc": "Hébergement",
                 "ecosystem.cyberplace.title": "Cyberplace",
                 "ecosystem.cyberplace.desc": "Ressources IA",
-                "ecosystem.cognition4ai.title": "R-JEPA",
-                "ecosystem.cognition4ai.desc": "World Model",
+                "ecosystem.cognition4ai.title": "Cognition4AI",
+                "ecosystem.cognition4ai.desc": "World Model R-JEPA",
                 "ecosystem.cognition4chat.title": "Cognition4Chat",
-                "ecosystem.cognition4chat.desc": "Agent WebChat",
+                "ecosystem.cognition4chat.desc": "Agent IA",
                 "ecosystem.senior.title": "Senior Robotics",
-                "ecosystem.senior.desc": "Joe - Robot Compagnon",
-                "hero.badge": "Propulsé par R-JEPA World Model",
-                "hero.title": "Discutez avec une IA qui réfléchit avant de parler",
-                "hero.description": "Découvrez la nouvelle génération d'IA conversationnelle. Cognition4Chat utilise le World Model R-JEPA pour raisonner dans l'espace latent avant de répondre, offrant des conversations plus réfléchies et cohérentes.",
-                "hero.try": "Essayer la Démo →",
-                "hero.api": "Voir l'API R-JEPA",
-                "chat.connected": "R-JEPA Connecté",
-                "chat.thinking": "Raisonnement avec R-JEPA...",
-                "chat.msg1": "Comment l'informatique quantique affecte-t-elle la cryptographie ?",
-                "chat.msg2": "L'informatique quantique présente à la fois des menaces et des opportunités pour la cryptographie. Alors que l'algorithme de Shor pourrait casser le chiffrement RSA, des méthodes cryptographiques post-quantiques comme la cryptographie basée sur les réseaux sont développées pour assurer la sécurité à l'ère quantique.",
-                "chat.placeholder": "Posez votre question...",
-                "chat.send": "Envoyer",
-                "features.title": "Raisonnement Augmenté",
-                "features.description": "Propulsé par R-JEPA, Cognition4Chat réfléchit avant de répondre",
-                "features.latent.title": "Raisonnement Latent",
-                "features.latent.desc": "Traite les requêtes via l'espace latent R-JEPA pour une compréhension profonde avant de générer des réponses.",
-                "features.multi.title": "Système Multi-Agent",
-                "features.multi.desc": "Plusieurs agents IA collaborent, guidés par le World Model pour produire des réponses cohérentes et précises.",
-                "features.memory.title": "Mémoire Associative",
-                "features.memory.desc": "Maintient le contexte via des patterns de mémoire associative, permettant des conversations naturelles multi-tours.",
-                "features.guidance.title": "Guidance Latente",
-                "features.guidance.desc": "Les prédictions R-JEPA guident la génération de réponses, assurant pertinence et cohérence.",
-                "modes.title": "Modes R-JEPA",
-                "modes.description": "Trois modes puissants pour différents besoins de raisonnement",
-                "modes.rerank.title": "Re-classement",
-                "modes.rerank.desc": "Génère plusieurs réponses et utilise R-JEPA pour scorer et sélectionner la plus cohérente.",
-                "modes.nudge.title": "Guidance Douce",
-                "modes.nudge.desc": "Oriente doucement la génération de réponse via les prédictions latentes comme contraintes souples.",
-                "modes.plan.title": "Planification",
-                "modes.plan.desc": "Utilise R-JEPA pour planifier le raisonnement multi-étapes avant d'exécuter des requêtes complexes.",
-                "how.title": "Comment ça Marche",
-                "how.step1.title": "Votre Message",
-                "how.step1.desc": "Entrez votre question",
-                "how.step2.title": "Traitement R-JEPA",
-                "how.step2.desc": "Le World Model raisonne",
-                "how.step3.title": "Génération Guidée",
-                "how.step3.desc": "Le LLM génère avec R-JEPA",
-                "how.step4.title": "Réponse Intelligente",
-                "how.step4.desc": "Réponse cohérente et réfléchie",
-                "cta.title": "Prêt à Expérimenter le Chat Augmenté ?",
-                "cta.description": "Commencez à discuter avec une IA qui réfléchit vraiment avant de parler.",
-                "cta.api": "Explorer l'API R-JEPA →",
-                "cta.docs": "Documentation",
+                "ecosystem.senior.desc": "Robot Compagnon",
+                "hero.badge": "🚀 Bientôt Disponible",
+                "hero.title": "Votre Agent IA pour l'Entreprise",
+                "hero.description": "Cognition4Chat est un agent IA intelligent qui répond aux appels téléphoniques, prend le contrôle des postes de travail pour l'assistance à distance, et fournit un support client 24/7. Automatisez vos communications d'entreprise.",
+                "hero.join": "Rejoindre la liste →",
+                "hero.learn": "En savoir plus",
+                "agent.role": "Assistant IA Entreprise",
+                "agent.status": "Actif",
+                "cap.phone.title": "Appels Téléphoniques",
+                "cap.phone.desc": "Réception et émission d'appels",
+                "cap.desktop.title": "Contrôle du Poste",
+                "cap.desktop.desc": "Assistance à distance & automatisation",
+                "cap.chat.title": "Chat en Direct",
+                "cap.chat.desc": "Support client 24/7",
+                "features.title": "Trois Capacités Puissantes",
+                "features.description": "Un seul agent IA qui gère tous vos besoins de communication",
+                "features.phone.title": "Agent Téléphonique IA",
+                "features.phone.desc": "Votre standardiste IA qui répond aux appels, prend les messages, planifie les rendez-vous et transfère vers la bonne personne.",
+                "features.phone.f1": "Conversations vocales naturelles",
+                "features.phone.f2": "Disponibilité 24/7",
+                "features.phone.f3": "Routage intelligent des appels",
+                "features.phone.f4": "Support multilingue",
+                "features.desktop.title": "Contrôle du Poste",
+                "features.desktop.desc": "Prenez le contrôle à distance des postes de travail pour fournir une assistance technique pratique et automatiser les tâches répétitives.",
+                "features.desktop.f1": "Accès distant sécurisé",
+                "features.desktop.f2": "Dépannage en direct",
+                "features.desktop.f3": "Automatisation des tâches",
+                "features.desktop.f4": "Partage d'écran",
+                "features.chat.title": "Support Chat Intelligent",
+                "features.chat.desc": "Interface de chat intelligente qui comprend le contexte, résout les problèmes et escalade quand nécessaire.",
+                "features.chat.f1": "Réponses instantanées",
+                "features.chat.f2": "Compréhension du contexte",
+                "features.chat.f3": "Escalade transparente",
+                "features.chat.f4": "Intégration CRM",
+                "usecases.title": "Parfait Pour",
+                "usecases.support.title": "Support IT",
+                "usecases.support.desc": "Fournissez une assistance technique à distance avec contrôle du poste et guidage vocal.",
+                "usecases.reception.title": "Accueil",
+                "usecases.reception.desc": "Ne ratez plus aucun appel. L'IA gère les demandes, réservations et prises de messages.",
+                "usecases.sales.title": "Ventes & Commandes",
+                "usecases.sales.desc": "Traitez les commandes, répondez aux questions produits et qualifiez les leads automatiquement.",
+                "usecases.training.title": "Formation",
+                "usecases.training.desc": "Guidez les employés dans les logiciels avec contrôle d'écran et instructions vocales.",
+                "how.title": "Comment Ça Marche",
+                "how.description": "Déployez votre agent IA en minutes, pas en mois",
+                "how.step1.title": "Connecter",
+                "how.step1.desc": "Liez votre système téléphonique, plateforme de chat et postes de travail",
+                "how.step2.title": "Configurer",
+                "how.step2.desc": "Définissez les connaissances, le ton et les capacités de votre agent",
+                "how.step3.title": "Déployer",
+                "how.step3.desc": "Mettez en ligne et laissez votre agent IA gérer les communications",
+                "how.step4.title": "Améliorer",
+                "how.step4.desc": "L'IA apprend des interactions et s'améliore avec le temps",
+                "cta.title": "Soyez les Premiers",
+                "cta.description": "Rejoignez la liste d'attente pour un accès anticipé à Cognition4Chat et des tarifs de lancement exclusifs.",
+                "cta.placeholder": "votre@email.com",
+                "cta.join": "Rejoindre",
+                "cta.note": "Pas de spam. Nous vous contacterons uniquement pour les mises à jour de lancement.",
+                "cta.future": "🧠 Vision future : Intégration R-JEPA AGI pour un raisonnement avancé",
                 "footer.products": "Produits",
                 "footer.resources": "Ressources",
                 "footer.docs": "Documentation",
-                "footer.powered": "Propulsé par"
+                "footer.enterprise": "Entreprise",
+                "footer.enterprise.desc": "Déploiement personnalisé, support dédié et options on-premise disponibles."
             }
         };
 
@@ -1219,12 +1311,24 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.feature-card, .mode-card').forEach(card => {
+        document.querySelectorAll('.feature-card, .step, .use-case').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+
+        // Waitlist form handler
+        function handleWaitlist(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            // TODO: Connect to backend/email service
+            alert(currentLang === 'fr'
+                ? `Merci ! ${email} a été ajouté à la liste d'attente.`
+                : `Thanks! ${email} has been added to the waitlist.`
+            );
+            e.target.reset();
+        }
     </script>
 </body>
 </html>
