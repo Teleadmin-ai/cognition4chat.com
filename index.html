@@ -1318,16 +1318,42 @@
             observer.observe(card);
         });
 
-        // Waitlist form handler
+        // Waitlist form handler - Google Forms integration
         function handleWaitlist(e) {
             e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
-            // TODO: Connect to backend/email service
-            alert(currentLang === 'fr'
-                ? `Merci ! ${email} a été ajouté à la liste d'attente.`
-                : `Thanks! ${email} has been added to the waitlist.`
-            );
-            e.target.reset();
+            const form = e.target;
+            const email = form.querySelector('input[type="email"]').value;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLang === 'fr' ? 'Envoi...' : 'Sending...';
+
+            // Google Forms submission URL
+            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdwVOGW8UEvRyemnInUCM-MR4-6t60XsK8ngFXqKTksyxv9DQ/formResponse';
+            const formData = new FormData();
+            formData.append('entry.2117581500', email);
+
+            // Submit to Google Forms (no-cors mode)
+            fetch(googleFormUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                // Success (we can't read response in no-cors, but it works)
+                alert(currentLang === 'fr'
+                    ? `Merci ! ${email} a été ajouté à la liste d'attente.`
+                    : `Thanks! ${email} has been added to the waitlist.`
+                );
+                form.reset();
+            }).catch(() => {
+                // Fallback - open Google Form directly
+                window.open(`https://docs.google.com/forms/d/e/1FAIpQLSdwVOGW8UEvRyemnInUCM-MR4-6t60XsK8ngFXqKTksyxv9DQ/viewform?usp=pp_url&entry.2117581500=${encodeURIComponent(email)}`, '_blank');
+            }).finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
         }
     </script>
 </body>
