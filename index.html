@@ -210,108 +210,18 @@
             border-color: var(--primary);
         }
 
-        /* Agent Visual */
-        .agent-visual {
-            background: var(--bg-card);
+        /* Agent Screenshot */
+        .agent-screenshot {
             border-radius: 20px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
-        .agent-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .agent-avatar {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-        }
-
-        .agent-info h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .agent-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        .agent-status {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--success);
-            font-size: 0.9rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .agent-capabilities {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .capability {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .capability-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(99, 102, 241, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .capability-text {
-            flex: 1;
-        }
-
-        .capability-text strong {
+        .agent-screenshot img {
+            width: 100%;
+            height: auto;
             display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .capability-text span {
-            color: var(--text-muted);
-            font-size: 0.85rem;
         }
 
         /* Features Section */
@@ -869,42 +779,9 @@
                     </div>
                 </div>
 
-                <!-- Agent Visual -->
-                <div class="agent-visual">
-                    <div class="agent-header">
-                        <div class="agent-avatar">🤖</div>
-                        <div class="agent-info">
-                            <h3>Cognition4Chat Agent</h3>
-                            <p data-i18n="agent.role">Enterprise AI Assistant</p>
-                        </div>
-                        <div class="agent-status">
-                            <span class="status-dot"></span>
-                            <span data-i18n="agent.status">Active</span>
-                        </div>
-                    </div>
-                    <div class="agent-capabilities">
-                        <div class="capability">
-                            <div class="capability-icon">📞</div>
-                            <div class="capability-text">
-                                <strong data-i18n="cap.phone.title">Phone Calls</strong>
-                                <span data-i18n="cap.phone.desc">Answering and making calls</span>
-                            </div>
-                        </div>
-                        <div class="capability">
-                            <div class="capability-icon">🖥️</div>
-                            <div class="capability-text">
-                                <strong data-i18n="cap.desktop.title">Desktop Control</strong>
-                                <span data-i18n="cap.desktop.desc">Remote assistance & automation</span>
-                            </div>
-                        </div>
-                        <div class="capability">
-                            <div class="capability-icon">💬</div>
-                            <div class="capability-text">
-                                <strong data-i18n="cap.chat.title">Live Chat</strong>
-                                <span data-i18n="cap.chat.desc">Customer support 24/7</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Agent Screenshot -->
+                <div class="agent-screenshot">
+                    <img src="AGENT-screen.png" alt="Cognition4Chat Interface" />
                 </div>
             </div>
         </section>
